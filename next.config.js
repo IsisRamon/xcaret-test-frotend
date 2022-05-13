@@ -5,8 +5,9 @@ const defaultLocale = "es-MX";
 
 const nextConfig = {
   env: {  
+    API_URL: process.env.API_URL,
     URL_HOST:process.env.HOST|| "http://localhost:8081",
-    URL_SERVER: "https://api-ecommerce-prueba.herokuapp.com/",
+    URL_SERVER: "",
   },
   reactStrictMode: true,
   async rewrites() {
