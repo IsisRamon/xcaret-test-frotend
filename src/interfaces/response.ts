@@ -1,18 +1,6 @@
 export type TImg = {src:string, alt:string};
 export type TLiks = {tittle:string, href:string}
 export type TNumbers = {name:string, number?:string, href?:string, main?:boolean};
-export type TLanguage = "es-ES"| "en-US";
-export type TTextContent = {
-    es: IResponse,
-    en: IResponse
-} | {};
-
-export interface IInitialState {
-textContent: TTextContent,
-initial:boolean
-language:TLanguage;
-}
-
 export interface IResponse {
     navbar: INavbar;
     header: IHeader;
@@ -86,3 +74,4 @@ export interface IFooter {
     copy:string;
     links: TLiks[];
 };
+

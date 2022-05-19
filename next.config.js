@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 
-const locales = ["es-ES", "en-US"];
-const defaultLocale = "es-ES";
-  
+const locales = ["es-MX", "en-US"];
+const defaultLocale = "es-MX";
+
 const nextConfig = {
   env: {  
     API_URL: process.env.API_URL,
@@ -10,12 +10,34 @@ const nextConfig = {
     URL_SERVER: "",
   },
   reactStrictMode: true,
-  i18n: {
-    locales: locales,
-    defaultLocale: defaultLocale,
+  async rewrites() {
+    return [
+      ...locales
+        .filter((locale) => locale !== defaultLocale)
+        .map((locale) => [
+          { source: `/${locale}{/}?`, destination: "/" },
+          { source: `/${locale}/:path*`, destination: "/:path*" },
+        ])
+        .reduce((acc, cur) => [...acc, ...cur], []),
+    ];
   },
+  async redirects() {
+    return [
+      {
+        source: `/${defaultLocale}{/}?`,
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: `/${defaultLocale}/:path*`,
+        destination: "/:path*",
+        permanent: true,
+      },
+    ];
+  }
 }
 
 module.exports = nextConfig
+
 
 

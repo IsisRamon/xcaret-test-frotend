@@ -1,8 +1,9 @@
-import {instance} from '~/api/config';
-import { IResponse } from '~/interfaces';
+import {instance} from '../config';
+import { IResponse } from '~/interfaces/response';
 
-export const GetResponse = async (language): Promise<IResponse>=> {
+export const GetResponse = async (): Promise<IResponse>=> {
+ 
     const response = await instance.get(``);
-    const data = response.data[language] as IResponse
+    const data = response.data.es as IResponse
     return data;
 }
