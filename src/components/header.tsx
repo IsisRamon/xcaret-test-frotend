@@ -27,44 +27,46 @@ const Header = (props) => {
   }, [props.initial === true]);
 
  
-  useEffect(() => {    
-    (document.getElementById("language") as HTMLInputElement).value = language;
+  useEffect(() => {   
+    if((document.getElementById("language") !== null)){
+      (document.getElementById("language") as HTMLInputElement).value = language;
+    }    
     preView(language, false)
   }, [language]);
 
-  return (
-      <nav className="fixed top-0 nav-header w-full flex items-center justify-between flex-wrap mx-auto text-color13 font-sans p-4 bg-color2">
-        <a onClick={() => (location.href = "/")}><img alt="Hoteles Xcaret" src={navbar.logo} className=" w-full m-auto"></img></a>
+  if(navbar === undefined ){
+    return <></>
+   } else{
+    return (
+        <nav className="fixed top-0 nav-header w-full flex items-center justify-between flex-wrap mx-auto text-color13 font-sans p-4 bg-color2">
+          <a onClick={() => (location.href = "/")}><img alt="Hoteles Xcaret" src={navbar.logo} className=" w-full m-auto"></img></a>
 
-        <ul className="hidden sm:flex flex-1 justify-end items-center gap-12 text-base">
-        <div className="flex flex-row h-20 w-50">
           
-
-
-
-          <div className="flex  justify-center items-center mr-1 h-10 w-30 border-opacity-50 rounded pl-2 pr-2 self-center">
-            <select
-              id="language"
-              className="border-4 h-8 w-20 rounded ml-3"
-              defaultValue={props.language}
-              onChange={(e) => setLanguage(e.target.value) }
-            >
-              {locales.map((l,index)=> {
-                return(
-                  <Link href={asPath} locale={l} key={index}>
-                  <option value={l}>{l}</option>
-                  </Link>                  
-                )
-              })}
-              
-            </select>
+          <div className="flex flex-row h-20 w-50">
+            
+            <div className="flex  justify-center items-center mr-1 h-10 w-30 border-opacity-50 rounded pl-2 pr-2 self-center">
+              <select
+                id="language"
+                className="border-4 h-8 w-20 rounded ml-3"
+                defaultValue={props.language || "es-ES"}
+                onChange={(e) => setLanguage(e.target.value) }
+              >
+                {locales.map((l,index)=> {
+                  return(
+                    <Link href={asPath} locale={l} key={index}>
+                    <option value={l}>{l}</option>
+                    </Link>                  
+                  )
+                })}
+                
+              </select>
+            </div>
+        
           </div>
-       
-        </div>
-        </ul>
-      </nav>
-  );
-};
+          
+        </nav>
+    );
+}};
 
 const mapStateToProps = (state: IInitialState) => {
   return {
