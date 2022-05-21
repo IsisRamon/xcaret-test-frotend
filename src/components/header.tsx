@@ -6,13 +6,11 @@ import { changeLanguage } from "~/redux/redux";
 import { IInitialState, IResponse } from "~/interfaces";
 import { GetResponse } from '~/api/endpoints/response'
 
-
-
 const Header = (props) => {
   const { locales, asPath } = useRouter();
   const [language, setLanguage] = useState(props.language || "es-ES")
   const {textContent} = props
-  const { navbar, legals,promotions,header } = textContent;
+  const { navbar} = textContent;
   let dispatch = useDispatch();
 
   const preView = async (l, initial) => {
@@ -38,16 +36,18 @@ const Header = (props) => {
     return <></>
    } else{
     return (
-        <nav className="fixed top-0 nav-header w-full flex items-center justify-between flex-wrap mx-auto text-color13 font-sans p-4 bg-color2">
-          <a onClick={() => (location.href = "/")}><img alt="Hoteles Xcaret" src={navbar.logo} className=" w-full m-auto"></img></a>
-
-          
-          <div className="flex flex-row h-20 w-50">
-            
-            <div className="flex  justify-center items-center mr-1 h-10 w-30 border-opacity-50 rounded pl-2 pr-2 self-center">
-              <select
+      <nav className="fixed top-0 nav-header w-full flex items-center justify-between flex-wrap mx-auto text-color13 font-sans p-4 bg-color2">
+      <a onClick={() => (location.href = "/")}><img alt="Hoteles Xcaret" src={navbar.logo} className=" w-full m-auto"></img></a>     
+      <div className="flex flex-row h-20 w-50">
+      <div className=" w-full md:block md:w-auto">
+          <ul className="flex flex-row mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium uppercase">
+            <li>
+              <a href="#" className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent  md:hover:text-blue-700 ">{navbar.menu.contact}</a>
+            </li>
+            <li>
+            <select
                 id="language"
-                className="border-4 h-8 w-20 rounded ml-3"
+                className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 bg-transparent"
                 defaultValue={props.language || "es-ES"}
                 onChange={(e) => setLanguage(e.target.value) }
               >
@@ -60,11 +60,24 @@ const Header = (props) => {
                 })}
                 
               </select>
-            </div>
-        
-          </div>
-          
-        </nav>
+            </li>
+            <li>
+              <select className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 bg-transparent uppercase">
+                  {navbar.menu.currency.map((m,index)=> {
+                    return(
+                      <Link href={asPath} locale={m} key={index}>
+                      <option value={m}>{m}</option>
+                      </Link>                  
+                    )
+                  })}
+              </select>
+            </li>
+            <li>    
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     );
 }};
 

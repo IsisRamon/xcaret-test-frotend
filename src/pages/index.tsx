@@ -1,10 +1,4 @@
-import Head from "next/head";
 import { connect } from "react-redux";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { GetResponse } from "~/api/endpoints/response";
-import { IResponse } from "~/interfaces";
-import { responseEntity } from "~/api/mockEntity";
 import { IInitialState } from "~/interfaces";
 import HomeDesktop from "~/components/home";
 const Home = (props) => {

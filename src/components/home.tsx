@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { connect } from "react-redux";
-
-import Image from "next/image";
-import { ICarousel, IResponse, IInitialState } from "~/interfaces";
-import { Slide } from "~/components/slide";
+import { IInitialState } from "~/interfaces";
+import Slide from "~/components/slide";
 
 const Home = (props) => {
   const { textContent } = props;
@@ -29,7 +27,7 @@ const Home = (props) => {
           <h1 className="text-center text-color13 pt-10 pb-4 text-5xl leading-normal uppercase lg:text-left">
             {header ? header.h1 : ""}
           </h1>
-
+          
           <div className="flex flex-col lg:flex-row">
             <div className="flex items-center">
               <p className="w-full text-center text-5xl text-color13 font-medium px-10 ">
@@ -69,7 +67,7 @@ const Home = (props) => {
                   <div className="py-10 mx-auto w-1/2">
                     <a
                       href={promotion.button.href}
-                      className="uppercase px-6 py-2 border text-black text-center mx-auto text-sm"
+                      className="uppercase px-6 py-2 border text-black  justify-center text-center mx-auto text-sm"
                     >
                       {promotion.button.text}
                     </a>
@@ -80,17 +78,19 @@ const Home = (props) => {
           );
         })}
 
-        <div className="container mx-auto relative flex flex-col py-10 lg:px-24">
-          <p className="text-2xl text-center lg:px-40">{carousel.text} </p>
-
+        <div className="container mx-auto  flex flex-col py-10 lg:px-24">
+          <p className="text-2xl py-10 text-center lg:px-40">{carousel.text} </p>
+          <Slide />
+          <div className="py-10 mx-auto w-1/2">
           <a
             href={buttonBook.href}
-            className="flex items-center justify-center w-[250px] h-[60px] border-solid border-color7 border rounded-sm uppercase  text-black text-center mx-auto text-sm"
+            className="flex items-center justify-center w-[250px] h-[60px] border-solid border-color7 border rounded-sm uppercase  text-black text-center mx-auto text-sm "
           >
             <h2>{buttonBook.text}</h2>
           </a>
+          </div>
         </div>
-        {/* <Slide carrucel={carousel as ICarousel}/> */}
+
         <div className="py-10 px-10 bg-lightsand bg-color3 lg:py-10 lg:px-20">
           {legal.map((lg, index) => {
             return (
@@ -122,21 +122,18 @@ const Home = (props) => {
               </div>
             </div>
             <div className=" mx-auto flex flex-wrap">
-              <div className="text-xs font-bold pr-10 mb-3">
-                <span className="uppercase flex mb-2">MÉXICO SIN COSTO</span>
-                <a className=" font-simplegrey" href="tel:8000097567">
-                  800 009 7567
-                </a>
-              </div>
 
-              <div className="text-xs font-bold text-simplegrey pr-10 mb-3">
-                <span className="uppercase text-simplegrey flex mb-2">
-                  CANADÁ
-                </span>
-                <a className=" font-simplegrey" href="tel:18448340153">
-                  1 844 834 0153
-                </a>
-              </div>
+              {prefooter.numbers.map((l,index) => {
+                return (
+                  
+                  <div className="text-xs font-bold pr-10 mb-3" key={index}>
+                  <span className="uppercase flex mb-2">{l.name}</span>
+                  <a className=" font-simplegrey" href={l.href}>
+                    {l.number}
+                  </a>
+                </div>
+                );
+              })}
             </div>
           </div>
 
